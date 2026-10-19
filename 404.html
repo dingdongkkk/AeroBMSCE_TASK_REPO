@@ -5,6 +5,9 @@
   <!-- served for any missing URL, so resolve links from the site root -->
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- switch to the "JS on" styles before the first paint, so scroll-in
+       content never flashes visible and then hides again -->
+  <script>document.documentElement.className = "js";</script>
   <meta name="robots" content="noindex">
   <meta name="description" content="This page doesn’t exist.">
   <meta name="theme-color" content="#0b0a09">

@@ -4,7 +4,7 @@
    same file can be loaded on every page safely.
    ========================================================= */
 
-document.documentElement.classList.remove("no-js");
+// (the "js" class is set by an inline script in <head> before first paint)
 
 /* ---------- Mobile navigation toggle ---------- */
 function setupNav() {
@@ -95,7 +95,11 @@ function setupCounters() {
     });
   }, { threshold: 0.5 });
 
-  counters.forEach(function (el) { observer.observe(el); });
+  counters.forEach(function (el) {
+    // start from 0 while the numbers are still hidden, so they never jump back
+    if (!reduceMotion) el.textContent = "0";
+    observer.observe(el);
+  });
 }
 
 /* ---------- Filter achievements by season ---------- */
@@ -229,6 +233,7 @@ function setupManifesto() {
     });
     block.replaceChild(fragment, child);
   });
+  block.classList.add("is-split");
 
   function update() {
     var rect = block.getBoundingClientRect();

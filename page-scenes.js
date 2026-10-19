@@ -6,6 +6,7 @@ import { createMaterials, emblem, turbine, drone, flight, satellite } from './ae
 // inline "stages" placed further down the page.
 document.querySelectorAll('[data-scene]').forEach(host => mount(host).catch(error => {
   host.classList.remove('scene-ready');
+  host.classList.add('scene-failed');
   host.querySelector('canvas')?.remove();
   const toggle = host.querySelector('.scene-toggle');
   if (toggle) toggle.hidden = true;

@@ -290,6 +290,7 @@ strong { color: var(--text); font-weight: 600; }
   z-index: 0;
 }
 .logo3d-ready .logo3d-fallback { display: none; }
+.js .logo3d-fallback { opacity: 0; animation: fallback-in .6s ease 5s forwards; }
 
 .hero3d-content { position: relative; z-index: 2; padding-bottom: clamp(32px, 5vw, 60px); max-width: none; }
 .hero3d-title { font-size: clamp(3rem, 6.2vw, 6.6rem); line-height: .92; letter-spacing: -0.05em; margin-bottom: 32px; }
@@ -440,8 +441,9 @@ a.row:hover .row-thumb, a.row:focus-visible .row-thumb { filter: none; transform
   mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%);
 }
 .stage canvas, .scene-panel canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.scene-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .5; }
+.scene-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: fallback-in .6s ease 5s forwards; }
 .scene-ready .scene-fallback { display: none; }
+.scene-failed .scene-fallback { animation-delay: 0s; } /* WebGL unavailable: show the still image straight away */
 .stage figcaption {
   position: absolute;
   left: 50%;
@@ -699,6 +701,15 @@ a.row:hover .row-thumb, a.row:focus-visible .row-thumb { filter: none; transform
 .reveal.is-visible { opacity: 1; transform: none; }
 .no-js .reveal { opacity: 1; transform: none; }
 
+/* Headings and the manifesto are re-built word by word by script.js; keep
+   them hidden until then so the plain text never flashes first. If the
+   script never runs they appear on their own after a moment. */
+.js :is(.section-head h2, .page-hero h1, .bleed-caption h2, .split h2):not(.split-heading),
+.js .manifesto:not(.is-split) {
+  visibility: hidden;
+  animation: show-late 0s linear 2.5s forwards;
+}
+
 .split-word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
 .split-word > span { display: inline-block; transform: translateY(105%); transition: transform 1s var(--ease); transition-delay: calc(var(--i, 0) * 50ms); }
 .split-heading.is-visible .split-word > span { transform: none; }
@@ -708,6 +719,8 @@ a.row:hover .row-thumb, a.row:focus-visible .row-thumb { filter: none; transform
 ::view-transition-new(root) { animation: vt-in .5s ease both; }
 
 @keyframes rise { to { transform: none; } }
+@keyframes show-late { to { visibility: visible; } }
+@keyframes fallback-in { to { opacity: .55; } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes blink { 50% { opacity: .2; } }
 @keyframes scroll-dot { 0% { transform: translateY(0); opacity: 1; } 80% { transform: translateY(14px); opacity: 0; } 100% { opacity: 0; } }
@@ -810,7 +823,7 @@ a.row:hover .row-thumb, a.row:focus-visible .row-thumb { filter: none; transform
 .huge-number { font-family: var(--font-display); font-weight: 600; font-size: clamp(4rem, 11vw, 10rem); line-height: .9; letter-spacing: -0.06em; color: var(--gold); margin: 0 0 20px; }
 .ticks--spaced { margin-top: 64px; }
 /* SVG eagle fallback for stages when WebGL isn't available */
-.scene-fallback[src$=".svg"] { object-fit: contain; padding: 18%; opacity: .9; }
+.scene-fallback[src$=".svg"] { object-fit: contain; padding: 18%; }
 
 /* Shorter disclaimer on small screens */
 .notice-short { display: none; }
