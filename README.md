@@ -33,7 +33,10 @@ Deployed on Vercel as a static site (no build step): https://aerobmsce-revamp.ve
 ```
 index.html, about.html, build.html, achievements.html, partners.html
 style.css    – one stylesheet: design tokens at the top, then sections by component
-script.js    – nav toggle, scroll reveal, counters, carousel, season filter, lightbox
+script.js    – nav toggle, scroll reveal, counters, carousel, season filter, lightbox,
+               progress bar, cursor ring, magnetic buttons, word-by-word headings, card tilt
+logo3d.js    – Three.js scene: the AeroBMSCE eagle as a 3D object (ES module)
+assets/logo-shape.json – the eagle traced from images/logo.png into vector outlines
 images/      – assets provided with the task (large photos re-compressed)
 ```
 
@@ -86,6 +89,11 @@ The most noticeable problems I found while exploring the broken site:
 - The four teams became cards with their focus area, and the R&D list became a numbered list on a dark background.
 - Partnership tiers became four equal cards with a colour-coded top edge instead of a fixed-width table.
 - Partner logos were all different colours and some were white-on-transparent, so they are shown as uniform white marks on dark tiles (more on this below).
+
+**The 3D eagle (Three.js).** The centrepiece of the home page is the AeroBMSCE logo as a real 3D object, not a spinning image. I traced `images/logo.png` into vector outlines (the black eagle and the gold dart separately, saved in `assets/logo-shape.json`), then `logo3d.js` extrudes them with bevelled edges: a graphite-metal body and a raised, polished gold dart, lit like a studio product shot (environment reflections, warm key light, gold and cool rim lights, a light that follows the cursor and a subtle bloom on the gold). It "swoops" in on load, banks towards the mouse, and climbs away as you scroll, while light streaks rush past like a wind tunnel and a runway grid moves underneath. Flight-deck readouts in the corners (ALT / SPD / HDG) react to scrolling and the cursor. Smaller versions of the eagle sit in the headers of the inner pages.
+It is built to be well-behaved: it only renders while it's on screen and the tab is visible, caps pixel ratio for performance, respects "reduce motion", and falls back to the flat logo image if WebGL isn't available.
+
+**Finishing touches.** A gold reading-progress bar, a cursor ring that grows over links, buttons that lean towards the cursor, headings that reveal word by word, explore cards that tilt in 3D with a light sheen, an outlined marquee of the competitions we fly at, a scrolling partner-logo strip, a faint film grain over the site, and smooth fades between pages (View Transitions).
 
 **Interaction.** Small and purposeful: sections fade in on scroll, numbers count up, the carousel has previous/next buttons and dots and pauses on hover/focus, gallery photos open in a lightbox (native `<dialog>`, closes with Esc or clicking outside), and on narrow screens the nav collapses into a menu button. All motion is turned off for users with "reduce motion" enabled.
 

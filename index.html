@@ -12,6 +12,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    } }
+  </script>
+  <script type="module" src="logo3d.js"></script>
 </head>
 <body>
 
@@ -36,26 +43,39 @@
 
 <main id="main">
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-hud" aria-hidden="true">
-      BASE <b>PROPEL LAB–3, BMSCE</b><br>
-      POS <b>12.94° N · 77.57° E</b><br>
-      EST <b>2012</b>
+  <!-- Hero: 3D eagle (logo3d.js) with flight-deck readouts -->
+  <section class="hero3d" data-logo3d="hero">
+    <img class="logo3d-fallback" src="images/logo.png" alt="" width="1537" height="699">
+
+    <div class="hud hud--tl" aria-hidden="true">
+      <span class="hud-dot"></span> AEROBMSCE // FLIGHT DECK<br>
+      BASE <b>PROPEL LAB–3</b>
     </div>
-    <div class="container">
-      <p class="eyebrow">BMS College of Engineering · Bengaluru</p>
-      <h1>Above gravity. <em>Beyond limits.</em></h1>
-      <p class="lead">One of India’s longest-running competitive aerospace &amp; UAV teams — with an international flight history. We design, build and fly aircraft, drones and autonomous systems.</p>
-      <div class="hero-actions">
-        <a class="btn btn--gold" href="achievements.html">See our record <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost-light" href="partners.html">Partner with us</a>
+    <div class="hud hud--tr" aria-hidden="true">
+      ALT <b data-hud="alt">01200</b> FT<br>
+      SPD <b data-hud="spd">140</b> KT<br>
+      HDG <b data-hud="hdg">000</b>°
+    </div>
+
+    <div class="container hero3d-content">
+      <h1 class="hero3d-title">
+        <span class="line"><span>Above gravity.</span></span>
+        <span class="line"><span><em>Beyond limits.</em></span></span>
+      </h1>
+      <div class="hero3d-bottom">
+        <p class="lead">One of India’s longest-running competitive aerospace &amp; UAV teams — designing, building and flying aircraft, drones and autonomous systems since 2012.</p>
+        <div class="hero-actions">
+          <a class="btn btn--gold magnetic" href="achievements.html">See our record <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost-light magnetic" href="partners.html">Partner with us</a>
+        </div>
       </div>
     </div>
+
+    <a class="scroll-cue" href="#numbers" aria-label="Scroll to content"><span></span></a>
   </section>
 
   <!-- Stats -->
-  <section class="stats" aria-label="AeroBMSCE in numbers">
+  <section class="stats" id="numbers" aria-label="AeroBMSCE in numbers">
     <div class="stat">
       <div class="stat-value">2012</div>
       <div class="stat-label">Established</div>
@@ -77,6 +97,11 @@
       <div class="stat-label">Departments on the team</div>
     </div>
   </section>
+
+  <!-- Competitions we fly at -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track"><span class="marquee-text">SAE Aero Design West</span><span class="marquee-star">✦</span><span class="marquee-text">Aerothon</span><span class="marquee-star">✦</span><span class="marquee-text">Techfest IIT Bombay</span><span class="marquee-star">✦</span><span class="marquee-text">NITK Drone Racing</span><span class="marquee-star">✦</span><span class="marquee-text">SAE-India</span><span class="marquee-star">✦</span><span class="marquee-text">ADDC 2026</span><span class="marquee-star">✦</span><span class="marquee-text">NACDEC</span><span class="marquee-star">✦</span><span class="marquee-text">ISRO IROC</span><span class="marquee-star">✦</span><span class="marquee-text">SAE Aero Design West</span><span class="marquee-star">✦</span><span class="marquee-text">Aerothon</span><span class="marquee-star">✦</span><span class="marquee-text">Techfest IIT Bombay</span><span class="marquee-star">✦</span><span class="marquee-text">NITK Drone Racing</span><span class="marquee-star">✦</span><span class="marquee-text">SAE-India</span><span class="marquee-star">✦</span><span class="marquee-text">ADDC 2026</span><span class="marquee-star">✦</span><span class="marquee-text">NACDEC</span><span class="marquee-star">✦</span><span class="marquee-text">ISRO IROC</span><span class="marquee-star">✦</span></div>
+  </div>
 
   <!-- Explore -->
   <section class="section">
@@ -168,17 +193,11 @@
         <p class="eyebrow">Our ecosystem</p>
         <h2>Built with industry-standard tools.</h2>
       </div>
-      <div class="logo-wall reveal">
-        <div class="logo-tile"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/ansys.png" alt="Ansys" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/altair.png" alt="Altair" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/siemens.png" alt="Siemens" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/flow5.png" alt="flow5" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/simscale.png" alt="SimScale" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"></div>
-        <div class="logo-tile"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"></div>
-        <div class="logo-tile"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"></div>
+      <div class="logo-marquee reveal">
+        <div class="marquee-track">
+          <div class="logo-tile"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"></div><div class="logo-tile"><img src="images/ansys.png" alt="Ansys" loading="lazy"></div><div class="logo-tile"><img src="images/altair.png" alt="Altair" loading="lazy"></div><div class="logo-tile"><img src="images/siemens.png" alt="Siemens" loading="lazy"></div><div class="logo-tile"><img src="images/flow5.png" alt="flow5" loading="lazy"></div><div class="logo-tile"><img src="images/simscale.png" alt="SimScale" loading="lazy"></div><div class="logo-tile"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"></div><div class="logo-tile"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"></div><div class="logo-tile"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"></div><div class="logo-tile"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"></div>
+          <div class="logo-dupe" aria-hidden="true"><div class="logo-tile"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"></div><div class="logo-tile"><img src="images/ansys.png" alt="Ansys" loading="lazy"></div><div class="logo-tile"><img src="images/altair.png" alt="Altair" loading="lazy"></div><div class="logo-tile"><img src="images/siemens.png" alt="Siemens" loading="lazy"></div><div class="logo-tile"><img src="images/flow5.png" alt="flow5" loading="lazy"></div><div class="logo-tile"><img src="images/simscale.png" alt="SimScale" loading="lazy"></div><div class="logo-tile"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"></div><div class="logo-tile"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"></div><div class="logo-tile"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"></div><div class="logo-tile"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"></div></div>
+        </div>
       </div>
     </div>
   </section>

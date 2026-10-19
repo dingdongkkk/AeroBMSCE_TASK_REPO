@@ -172,6 +172,140 @@ function setupLightbox() {
   });
 }
 
+/* ---------- Gold reading-progress bar at the top ---------- */
+function setupProgressBar() {
+  var bar = document.createElement("div");
+  bar.className = "progress-bar";
+  document.body.appendChild(bar);
+
+  function update() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var progress = max > 0 ? window.scrollY / max : 0;
+    bar.style.transform = "scaleX(" + progress + ")";
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+}
+
+/* ---------- Cursor ring that follows the mouse (desktop only) ---------- */
+function setupCursor() {
+  var finePointer = window.matchMedia("(pointer: fine)").matches;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!finePointer || reduceMotion) return;
+
+  var ring = document.createElement("div");
+  ring.className = "cursor-ring";
+  document.body.appendChild(ring);
+
+  var target = { x: 0, y: 0 };
+  var pos = { x: 0, y: 0 };
+
+  window.addEventListener("pointermove", function (event) {
+    target.x = event.clientX;
+    target.y = event.clientY;
+    ring.classList.add("is-on");
+    var interactive = event.target.closest("a, button, [data-lightbox]");
+    ring.classList.toggle("is-hover", !!interactive);
+  }, { passive: true });
+  document.addEventListener("pointerleave", function () { ring.classList.remove("is-on"); });
+
+  (function follow() {
+    // ease the ring towards the pointer for a smooth trailing effect
+    pos.x += (target.x - pos.x) * 0.2;
+    pos.y += (target.y - pos.y) * 0.2;
+    ring.style.transform = "translate(" + pos.x + "px," + pos.y + "px)";
+    requestAnimationFrame(follow);
+  })();
+}
+
+/* ---------- Buttons that lean towards the cursor ---------- */
+function setupMagnetic() {
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+
+  document.querySelectorAll(".magnetic").forEach(function (el) {
+    el.addEventListener("pointermove", function (event) {
+      var rect = el.getBoundingClientRect();
+      var dx = event.clientX - (rect.left + rect.width / 2);
+      var dy = event.clientY - (rect.top + rect.height / 2);
+      el.style.transform = "translate(" + dx * 0.22 + "px," + dy * 0.32 + "px)";
+    });
+    el.addEventListener("pointerleave", function () { el.style.transform = ""; });
+  });
+}
+
+/* ---------- Headings reveal word by word ---------- */
+function setupSplitHeadings() {
+  var headings = document.querySelectorAll(".section-head h2, .page-hero h1, .cta-band h2");
+  if (!headings.length || !("IntersectionObserver" in window)) return;
+
+  var wordIndex = 0;
+
+  // Wrap each word of every text node in <span class="split-word"><span>word</span></span>
+  function wrapWords(node) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+      if (child.nodeType === 3) {
+        var parts = child.textContent.split(/(\s+)/);
+        var fragment = document.createDocumentFragment();
+        parts.forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            fragment.appendChild(document.createTextNode(part));
+            return;
+          }
+          var outer = document.createElement("span");
+          outer.className = "split-word";
+          var inner = document.createElement("span");
+          inner.style.setProperty("--i", wordIndex++);
+          inner.textContent = part;
+          outer.appendChild(inner);
+          fragment.appendChild(outer);
+        });
+        node.replaceChild(fragment, child);
+      } else if (child.nodeType === 1) {
+        wrapWords(child);
+      }
+    });
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  headings.forEach(function (heading) {
+    wordIndex = 0;
+    wrapWords(heading);
+    heading.classList.add("split-heading");
+    observer.observe(heading);
+  });
+}
+
+/* ---------- Explore cards tilt in 3D under the pointer ---------- */
+function setupTilt() {
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+
+  document.querySelectorAll(".explore-card").forEach(function (card) {
+    card.addEventListener("pointermove", function (event) {
+      var rect = card.getBoundingClientRect();
+      var x = (event.clientX - rect.left) / rect.width;  // 0..1
+      var y = (event.clientY - rect.top) / rect.height; // 0..1
+      card.style.setProperty("--ry", (x - 0.5) * 10 + "deg");
+      card.style.setProperty("--rx", (0.5 - y) * 10 + "deg");
+      card.style.setProperty("--mx", x * 100 + "%");
+      card.style.setProperty("--my", y * 100 + "%");
+    });
+    card.addEventListener("pointerleave", function () {
+      card.style.setProperty("--rx", "0deg");
+      card.style.setProperty("--ry", "0deg");
+    });
+  });
+}
+
 /* ---------- Footer year ---------- */
 function setupYear() {
   var el = document.getElementById("year");
@@ -186,4 +320,9 @@ document.addEventListener("DOMContentLoaded", function () {
   setupSeasonFilter();
   setupLightbox();
   setupYear();
+  setupProgressBar();
+  setupCursor();
+  setupMagnetic();
+  setupSplitHeadings();
+  setupTilt();
 });

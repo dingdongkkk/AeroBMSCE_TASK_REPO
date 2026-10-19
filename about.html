@@ -12,6 +12,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    } }
+  </script>
+  <script type="module" src="logo3d.js"></script>
 </head>
 <body>
 
@@ -36,7 +43,7 @@
 
 <main id="main">
 
-  <section class="page-hero">
+  <section class="page-hero" data-logo3d="mini">
     <div class="container">
       <p class="eyebrow">01 / Who we are</p>
       <h1>A flight crew of engineers from every discipline.</h1>
