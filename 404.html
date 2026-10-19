@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <!-- served for any missing URL, so resolve links from the site root -->
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="This page doesn’t exist.">
+  <meta name="theme-color" content="#0b0a09">
+  <!-- link previews when the URL is shared -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="AeroBMSCE">
+  <meta property="og:title" content="Page not found — AeroBMSCE">
+  <meta property="og:description" content="This page doesn’t exist.">
+  <meta property="og:image" content="https://aerobmsce-revamp.vercel.app/images/photo1.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Page not found — AeroBMSCE</title>
+  <link rel="icon" href="images/eagle.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    } }
+  </script>
+  <!-- world.js: the shared 3D sky behind every page; the others draw this page's models -->
+  <script type="module" src="world.js"></script>
+  <script type="module" src="page-scenes.js"></script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="notice"><span class="notice-long">Practice website for the AeroBMSCE web development recruitment task. This is not the official AeroBMSCE website.</span><span class="notice-short">Practice site — not the official AeroBMSCE website.</span></div>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html" aria-label="AeroBMSCE home">
+      <img src="images/eagle.svg" alt="" width="48" height="22">
+      <span class="brand-name">AEROBMSCE<small>Above gravity · Beyond limits</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">Who We Are</a>
+      <a href="build.html">What We Build</a>
+      <a href="achievements.html">Achievements</a>
+      <a class="nav-cta" href="partners.html">Partner With Us</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero">
+    <figure class="scene-panel" data-scene="index" aria-label="AeroBMSCE / Emblem">
+      <img class="scene-fallback" src="images/eagle.svg" alt="">
+      <figcaption><span>AeroBMSCE / Emblem</span></figcaption>
+      <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+    </figure>
+    <div class="container">
+      <p class="eyebrow">Error 404</p>
+      <h1>Lost in the clouds.</h1>
+      <p class="lead">This page doesn’t exist — it may have moved. Let’s get you back on course.</p>
+      <div class="actions">
+        <a class="btn btn--gold" href="index.html">Back to home <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn" href="achievements.html">See our record</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>AeroBMSCE</h4>
+        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru. Flying since 2012.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Who We Are</a></li>
+          <li><a href="build.html">What We Build</a></li>
+          <li><a href="achievements.html">Achievements</a></li>
+          <li><a href="partners.html">Partner With Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Rajesh — Partnership Head</li>
+          <li><a href="mailto:aerobmsce@bmsce.ac.in">aerobmsce@bmsce.ac.in</a></li>
+          <li>Propel Lab–3, BMS College of Engineering</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">AEROBMSCE</div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> AeroBMSCE</span>
+      <span>Recruitment task build — not the official website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

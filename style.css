@@ -392,21 +392,18 @@ a.row:hover { padding-left: 18px; }
 a.row:hover h3, a.row:hover .row-arrow { color: var(--gold); }
 a.row:hover .row-arrow { transform: translateX(6px) rotate(-45deg); }
 
-/* Floating image that follows the pointer over linked rows (script.js) */
-.row-preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 320px;
-  aspect-ratio: 4 / 3;
+/* Linked rows with a photo thumbnail that sits inside the row (never over the text) */
+.row--thumb { grid-template-columns: 90px 1fr 1.2fr 168px 40px; align-items: center; }
+.row-thumb {
+  width: 168px;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
-  pointer-events: none;
-  z-index: 40;
-  opacity: 0;
   border-radius: 4px;
-  transition: opacity .3s;
+  filter: grayscale(1) brightness(.7);
+  transform: scale(.92);
+  transition: filter .5s, transform .6s var(--ease);
 }
-.row-preview.is-on { opacity: 1; }
+a.row:hover .row-thumb, a.row:focus-visible .row-thumb { filter: none; transform: scale(1) rotate(-2deg); }
 
 /* Simple list with gold arrows */
 .ticks { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
@@ -736,6 +733,8 @@ a.row:hover .row-arrow { transform: translateX(6px) rotate(-45deg); }
   .tier:nth-child(3) { padding-left: 0; border-left: 0; }
   .tier:nth-child(n+3) { border-top: 1px solid var(--line); margin-top: 24px; }
   .row { grid-template-columns: 60px 1fr 1fr 30px; }
+  .row--thumb { grid-template-columns: 60px 1fr 1fr 140px 30px; }
+  .row-thumb { width: 140px; }
 }
 
 @media (max-width: 860px) {
@@ -768,7 +767,11 @@ a.row:hover .row-arrow { transform: translateX(6px) rotate(-45deg); }
   .row-num { grid-column: 1 / -1; }
   .row p { grid-column: 1 / -1; }
   .row-arrow { grid-row: 2; grid-column: 2; }
-  .row-preview { display: none; }
+  .row--thumb { grid-template-columns: 1fr 24px; }
+  .row-thumb { grid-column: 1 / -1; grid-row: 2; width: 100%; transform: none; filter: none; margin: 6px 0 4px; }
+  .row--thumb h3 { grid-row: 3; }
+  .row--thumb .row-arrow { grid-row: 3; }
+  .row--thumb p { grid-row: 4; }
 
   .hero3d { min-height: 640px; }
   .hero3d-bottom { flex-direction: column; align-items: flex-start; }
@@ -808,3 +811,10 @@ a.row:hover .row-arrow { transform: translateX(6px) rotate(-45deg); }
 .ticks--spaced { margin-top: 64px; }
 /* SVG eagle fallback for stages when WebGL isn't available */
 .scene-fallback[src$=".svg"] { object-fit: contain; padding: 18%; opacity: .9; }
+
+/* Shorter disclaimer on small screens */
+.notice-short { display: none; }
+@media (max-width: 560px) {
+  .notice-long { display: none; }
+  .notice-short { display: inline; }
+}

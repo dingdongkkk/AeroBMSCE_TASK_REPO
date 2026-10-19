@@ -284,46 +284,6 @@ function setupParallax() {
   update();
 }
 
-/* ---------- Linked rows show a photo that follows the pointer ---------- */
-function setupRowPreview() {
-  var rows = document.querySelectorAll("a.row[data-preview]");
-  if (!rows.length || !window.matchMedia("(pointer: fine)").matches) return;
-
-  var preview = document.createElement("img");
-  preview.className = "row-preview";
-  preview.alt = "";
-  document.body.appendChild(preview);
-
-  var target = { x: 0, y: 0 };
-  var pos = { x: 0, y: 0 };
-  var active = false;
-
-  rows.forEach(function (row) {
-    row.addEventListener("pointerenter", function () {
-      preview.src = row.getAttribute("data-preview");
-      preview.classList.add("is-on");
-      active = true;
-    });
-    row.addEventListener("pointerleave", function () {
-      preview.classList.remove("is-on");
-      active = false;
-    });
-  });
-  window.addEventListener("pointermove", function (event) {
-    target.x = event.clientX;
-    target.y = event.clientY;
-  }, { passive: true });
-
-  (function follow() {
-    pos.x += (target.x - pos.x) * 0.15;
-    pos.y += (target.y - pos.y) * 0.15;
-    if (active) {
-      preview.style.transform = "translate(" + (pos.x + 30) + "px," + (pos.y - 120) + "px) rotate(" + ((target.x - pos.x) * 0.04) + "deg)";
-    }
-    requestAnimationFrame(follow);
-  })();
-}
-
 /* ---------- Footer year ---------- */
 function setupYear() {
   var el = document.getElementById("year");
@@ -343,5 +303,4 @@ document.addEventListener("DOMContentLoaded", function () {
   setupManifesto();
   setupReel();
   setupParallax();
-  setupRowPreview();
 });

@@ -16,7 +16,7 @@ A rebuilt, responsive website for **AeroBMSCE**, the aerospace, aeromodelling an
 | Our Achievements | `achievements.html` | Season-by-season results 2018–2026 with a season filter, photo gallery with lightbox |
 | Partner With Us | `partners.html` | Upcoming competitions, how partners help, collaboration tiers, outcomes, ecosystem logos, contact |
 
-`journey.html` (the old page name) redirects to `achievements.html` so old links still work.
+`journey.html` (the old page name) redirects to `achievements.html` so old links still work, and `404.html` catches any other missing URL with a way back home.
 
 ## Running it
 
@@ -83,7 +83,7 @@ The most noticeable problems I found while exploring the broken site:
 **Concept — "night flight".** The whole site is one continuous dark sky. A single fixed Three.js canvas (`world.js`) sits behind every page: gold dust drifting past, wind streaks that speed up while you scroll, and a runway grid sliding underneath, with the camera climbing as you scroll. Content floats on top of it instead of sitting in boxes, so moving between sections and pages feels like one flight rather than a stack of panels. The palette comes straight from the logo: near-black, warm ivory text and the eagle's gold.
 
 **Open, editorial layout — no boxed cards.** An earlier version leaned on cards and tinted panels and felt "boxed in". This version replaces them with:
-- **Hairline rows** for teams, R&D projects, upcoming competitions and the site index. On the home page, hovering a row shows a photo that follows the cursor.
+- **Hairline rows** for teams, R&D projects, upcoming competitions and the site index. On the home page each link row has its own photo, which lights up in colour on hover.
 - **Huge numbers separated by thin rules** instead of stat boxes.
 - **Full-bleed photos** that fade into the dark at top and bottom and move slightly slower than the page (parallax).
 - A **manifesto** paragraph whose words light up as you scroll through it.
