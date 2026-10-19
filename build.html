@@ -5,13 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <meta name="description" content="What we build — AeroBMSCE's competition teams and research &amp; development projects.">
+  <meta name="theme-color" content="#0b0a09">
   <title>What We Build — AeroBMSCE</title>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="images/eagle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    } }
+  </script>
+  <!-- world.js: the shared 3D sky behind every page; the others draw this page's models -->
+  <script type="module" src="world.js"></script>
+  <script type="module" src="page-scenes.js"></script>
 </head>
 <body>
 
@@ -21,7 +31,8 @@
 <header class="site-header">
   <div class="container">
     <a class="brand" href="index.html" aria-label="AeroBMSCE home">
-      <img src="images/header-logo.png" alt="AeroBMSCE — Above Gravity, Beyond Limits" width="1688" height="454">
+      <img src="images/eagle.svg" alt="" width="48" height="22">
+      <span class="brand-name">AEROBMSCE<small>Above gravity · Beyond limits</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
@@ -37,7 +48,11 @@
 <main id="main">
 
   <section class="page-hero">
-    <img class="page-hero-art" src="images/cad-plane.png" alt="">
+    <figure class="scene-panel" data-scene="build" aria-label="Autonomy / Multirotor platform">
+      <img class="scene-fallback" src="images/cad-plane.png" alt="">
+      <figcaption><span>Autonomy / Multirotor platform</span></figcaption>
+      <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+    </figure>
     <div class="container">
       <p class="eyebrow">02 / What we build</p>
       <h1>From CAD to the sky.</h1>
@@ -48,111 +63,86 @@
   <!-- Teams -->
   <section class="section">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <p class="eyebrow">Our teams</p>
         <h2>Four teams, one hangar.</h2>
         <p class="lead">Our competitive spirit shows through the teams that represent us at prestigious events in India and abroad.</p>
       </div>
-      <div class="grid grid--4">
-        <article class="card team-card reveal">
-          <span class="code">TEAM 01</span>
-          <h3>Yaksha</h3>
-          <p><span class="tag">International competitions</span></p>
-          <p class="team-desc">Represents AeroBMSCE on the world stage, including SAE International Aero Design West in the USA.</p>
-        </article>
-        <article class="card team-card reveal">
-          <span class="code">TEAM 02</span>
-          <h3>Blue Impulse</h3>
-          <p><span class="tag">Aeromodelling</span></p>
-          <p class="team-desc">Fixed-wing aeromodelling — national winners at SAE-India in 2020.</p>
-        </article>
-        <article class="card team-card reveal">
-          <span class="code">TEAM 03</span>
-          <h3>Flying Phantoms</h3>
-          <p><span class="tag">Drone development</span></p>
-          <p class="team-desc">Multirotor UAVs for design challenges — 2nd overall at SAE Aerothon 2025.</p>
-        </article>
-        <article class="card team-card reveal">
-          <span class="code">TEAM 04</span>
-          <h3>Vectors</h3>
-          <p><span class="tag">Drone racing</span></p>
-          <p class="team-desc">High-speed FPV racing — podiums at NITK and Global Academy of Technology.</p>
-        </article>
+      <ul class="rows reveal">
+        <li class="row"><span class="row-num">TEAM 01</span><h3>Yaksha<span class="row-tag">International competitions</span></h3><p>Represents AeroBMSCE on the world stage, including SAE International Aero Design West in the USA.</p><span></span></li>
+        <li class="row"><span class="row-num">TEAM 02</span><h3>Blue Impulse<span class="row-tag">Aeromodelling</span></h3><p>Fixed-wing aeromodelling — national winners at SAE-India in 2020.</p><span></span></li>
+        <li class="row"><span class="row-num">TEAM 03</span><h3>Flying Phantoms<span class="row-tag">Drone development</span></h3><p>Multirotor UAVs for design challenges — 2nd overall at SAE Aerothon 2025.</p><span></span></li>
+        <li class="row"><span class="row-num">TEAM 04</span><h3>Vectors<span class="row-tag">Drone racing</span></h3><p>High-speed FPV racing — podiums at NITK and Global Academy of Technology.</p><span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Photo reel: scroll down, it moves sideways -->
+  <section class="reel" aria-label="In the field">
+    <div class="reel-sticky">
+      <div class="reel-head">
+        <h2>Built in the lab.<br>Proven in the field.</h2>
+        <p class="eyebrow">Scroll →</p>
+      </div>
+      <div class="reel-track">
+        <figure class="reel-item"><img src="images/photo1.jpg" alt="Team on stage receiving the 2nd prize cheque at SAE Aerothon 2025" loading="lazy"><figcaption><b>SAE Aerothon 2025</b><span>2nd overall</span></figcaption></figure>
+        <figure class="reel-item"><img src="images/photo7.jpg" alt="Flying Phantoms drone in front of the Aerothon 2025 prize board" loading="lazy"><figcaption><b>Flying Phantoms</b><span>Aerothon 2025</span></figcaption></figure>
+        <figure class="reel-item"><img src="images/photo2.jpg" alt="Team members holding their aircraft at an SAE India event" loading="lazy"><figcaption><b>Aircraft line-up</b><span>SAE India</span></figcaption></figure>
+        <figure class="reel-item"><img src="images/photo3.jpg" alt="Team in front of the SAE International banner" loading="lazy"><figcaption><b>Aero Design West</b><span>Fort Worth, USA</span></figcaption></figure>
+        <figure class="reel-item"><img src="images/photo8.jpg" alt="AeroBMSCE drone in flight against the sky" loading="lazy"><figcaption><b>Flight test</b><span>In the air</span></figcaption></figure>
+        <figure class="reel-item"><img src="images/photo4.jpg" alt="Team outside Prathyusha Engineering College" loading="lazy"><figcaption><b>On the road</b><span>Prathyusha Engg. College</span></figcaption></figure>
       </div>
     </div>
   </section>
 
-  <!-- Carousel -->
-  <section class="section section--alt">
+  <!-- CAD -->
+  <section class="section">
     <div class="container split">
+      <img class="reveal" src="images/cad-plane.png" alt="CAD model of an AeroBMSCE airframe showing ribs and spars" loading="lazy">
       <div class="reveal">
-        <p class="eyebrow">In the field</p>
-        <h2>Built in the lab. Proven at competitions.</h2>
-        <p class="lead">Every aircraft we design gets flown, judged and pushed to its limits — and then improved for next season.</p>
-        <ul class="tick-list">
+        <p class="eyebrow">Design first</p>
+        <h2>Every airframe starts as a model.</h2>
+        <ul class="ticks">
           <li>Competitive aircraft &amp; UAV design</li>
           <li>Industry-grade fabrication &amp; testing</li>
           <li>A flight-proven product ready for the world stage</li>
         </ul>
       </div>
-      <div class="carousel reveal" aria-roledescription="carousel" aria-label="Competition photos">
-        <div class="carousel-track">
-          <figure class="carousel-slide">
-            <img src="images/photo1.jpg" alt="Team on stage receiving the 2nd prize cheque at SAE Aerothon 2025">
-            <figcaption>SAE Aerothon 2025 — 2nd place overall</figcaption>
-          </figure>
-          <figure class="carousel-slide">
-            <img src="images/photo2.jpg" alt="Team members holding their aircraft at an SAE India event" loading="lazy">
-            <figcaption>Aircraft line-up at an SAE India event</figcaption>
-          </figure>
-          <figure class="carousel-slide">
-            <img src="images/photo3.jpg" alt="Team in front of the SAE International banner" loading="lazy">
-            <figcaption>SAE Aero Design West — Fort Worth, Texas</figcaption>
-          </figure>
-          <figure class="carousel-slide">
-            <img src="images/photo4.jpg" alt="Team outside Prathyusha Engineering College" loading="lazy">
-            <figcaption>On the road at Prathyusha Engineering College</figcaption>
-          </figure>
-        </div>
-        <div class="carousel-dots"></div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" type="button" data-prev aria-label="Previous photo">←</button>
-          <button class="carousel-btn" type="button" data-next aria-label="Next photo">→</button>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- R&D -->
-  <section class="section section--dark">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Research &amp; development</p>
-        <h2>What we’re working on next.</h2>
-        <p class="lead">Ongoing and upcoming initiatives — 100% of R&amp;D and technical fabrication for our current flight systems is subsidised by the R&amp;D department at BMS College of Engineering.</p>
-      </div>
-      <div class="rnd-list">
-        <div class="rnd-item reveal"><div><h3>Indigenous Flight Controller</h3><p>End-to-end hardware and firmware design.</p></div></div>
-        <div class="rnd-item reveal"><div><h3>Electronic Speed Controller (ESC)</h3><p>High-efficiency propulsion electronics.</p></div></div>
-        <div class="rnd-item reveal"><div><h3>GPS-Denied Navigation</h3><p>Vision- and sensor-based autonomous navigation.</p></div></div>
-        <div class="rnd-item reveal"><div><h3>Surveillance Aircraft</h3><p>Re-configurable multi-mission fixed-wing UAV with convertible propulsion and an integrated modular payload bay.</p></div></div>
-        <div class="rnd-item reveal"><div><h3>Confidential Defence Project <span class="tag">with DRDO</span></h3><p>In collaboration with DRDO — details restricted.</p></div></div>
-        <div class="rnd-item reveal"><div><h3>Morphing Wingtip Mechanisms</h3><p>Adaptive aerodynamics for performance optimisation.</p></div></div>
-        <div class="rnd-item reveal"><div><h3>Deployable Micro-Fins</h3><p>Directional stability enhancement — active stability control for UAV platforms.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Next -->
+  <!-- R&D, with the turbine model -->
   <section class="section">
     <div class="container">
-      <div class="cta-band reveal">
-        <div>
-          <h2>See how it performed.</h2>
-          <p>Season-by-season results from 2018 to 2026.</p>
+      <div class="split">
+        <div class="reveal">
+          <p class="eyebrow">Research &amp; development</p>
+          <h2>What we’re working on next.</h2>
+          <p class="lead">Ongoing and upcoming initiatives. 100% of R&amp;D and technical fabrication for our current flight systems is subsidised by the R&amp;D department at BMS College of Engineering.</p>
         </div>
-        <a class="btn btn--ghost" href="achievements.html">Our achievements <span class="arrow" aria-hidden="true">→</span></a>
+        <figure class="stage" data-scene="about" aria-label="Propulsion / Turbine study">
+          <img class="scene-fallback" src="images/photo2.jpg" alt="">
+          <figcaption>Propulsion / Turbine study</figcaption>
+          <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+        </figure>
       </div>
+      <ul class="rows reveal">
+        <li class="row"><span class="row-num">01</span><h3>Indigenous Flight Controller</h3><p>End-to-end hardware and firmware design.</p><span></span></li>
+        <li class="row"><span class="row-num">02</span><h3>Electronic Speed Controller (ESC)</h3><p>High-efficiency propulsion electronics.</p><span></span></li>
+        <li class="row"><span class="row-num">03</span><h3>GPS-Denied Navigation</h3><p>Vision- and sensor-based autonomous navigation.</p><span></span></li>
+        <li class="row"><span class="row-num">04</span><h3>Surveillance Aircraft</h3><p>Re-configurable multi-mission fixed-wing UAV with convertible propulsion and an integrated modular payload bay.</p><span></span></li>
+        <li class="row"><span class="row-num">05</span><h3>Confidential Defence Project</h3><p>In collaboration with DRDO — details restricted.</p><span></span></li>
+        <li class="row"><span class="row-num">06</span><h3>Morphing Wingtip Mechanisms</h3><p>Adaptive aerodynamics for performance optimisation.</p><span></span></li>
+        <li class="row"><span class="row-num">07</span><h3>Deployable Micro-Fins</h3><p>Directional stability enhancement — active stability control for UAV platforms.</p><span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container big-cta reveal">
+      <p class="eyebrow">Next</p>
+      <a href="achievements.html">See the results <span aria-hidden="true">↗</span></a>
+      <p class="lead">Season-by-season results from 2018 to 2026.</p>
     </div>
   </section>
 
@@ -161,9 +151,9 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="badge"><img src="images/header-logo.png" alt="AeroBMSCE" width="1688" height="454"></span>
-        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru.</p>
+      <div>
+        <h4>AeroBMSCE</h4>
+        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru. Flying since 2012.</p>
       </div>
       <div>
         <h4>Explore</h4>
@@ -184,6 +174,7 @@
         </ul>
       </div>
     </div>
+    <div class="footer-wordmark" aria-hidden="true">AEROBMSCE</div>
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> AeroBMSCE</span>
       <span>Recruitment task build — not the official website</span>

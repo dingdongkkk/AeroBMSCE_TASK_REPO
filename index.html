@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <meta name="description" content="AeroBMSCE — the aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru.">
+  <meta name="theme-color" content="#0b0a09">
   <title>AeroBMSCE — Above Gravity, Beyond Limits</title>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="images/eagle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +19,10 @@
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
     } }
   </script>
+  <!-- world.js: the shared 3D sky behind every page; the others draw this page's models -->
+  <script type="module" src="world.js"></script>
   <script type="module" src="logo3d.js"></script>
+  <script type="module" src="page-scenes.js"></script>
 </head>
 <body>
 
@@ -28,7 +32,8 @@
 <header class="site-header">
   <div class="container">
     <a class="brand" href="index.html" aria-label="AeroBMSCE home">
-      <img src="images/header-logo.png" alt="AeroBMSCE — Above Gravity, Beyond Limits" width="1688" height="454">
+      <img src="images/eagle.svg" alt="" width="48" height="22">
+      <span class="brand-name">AEROBMSCE<small>Above gravity · Beyond limits</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
@@ -43,9 +48,9 @@
 
 <main id="main">
 
-  <!-- Hero: 3D eagle (logo3d.js) with flight-deck readouts -->
+  <!-- Hero: the 3D eagle (logo3d.js) with flight-deck readouts -->
   <section class="hero3d" data-logo3d="hero">
-    <img class="logo3d-fallback" src="images/logo.png" alt="" width="1537" height="699">
+    <img class="logo3d-fallback" src="images/eagle.svg" alt="" width="1000" height="460">
 
     <div class="hud hud--tl" aria-hidden="true">
       <span class="hud-dot"></span> AEROBMSCE // FLIGHT DECK<br>
@@ -64,154 +69,117 @@
       </h1>
       <div class="hero3d-bottom">
         <p class="lead">One of India’s longest-running competitive aerospace &amp; UAV teams — designing, building and flying aircraft, drones and autonomous systems since 2012.</p>
-        <div class="hero-actions">
-          <a class="btn btn--gold magnetic" href="achievements.html">See our record <span class="arrow" aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost-light magnetic" href="partners.html">Partner with us</a>
+        <div class="actions">
+          <a class="btn btn--gold" href="achievements.html">See our record <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="partners.html">Partner with us</a>
         </div>
       </div>
     </div>
 
-    <a class="scroll-cue" href="#numbers" aria-label="Scroll to content"><span></span></a>
+    <a class="scroll-cue" href="#manifesto" aria-label="Scroll to content"><span></span></a>
   </section>
 
-  <!-- Stats -->
-  <section class="stats" id="numbers" aria-label="AeroBMSCE in numbers">
-    <div class="stat">
-      <div class="stat-value">2012</div>
-      <div class="stat-label">Established</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value"><span data-count="75">75</span><span class="plus">+</span></div>
-      <div class="stat-label">Projects completed</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value"><span data-count="20">20</span><span class="plus">+</span></div>
-      <div class="stat-label">Podium finishes</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value"><span data-count="50">50</span><span class="plus">+</span></div>
-      <div class="stat-label">Papers, reports &amp; certifications</div>
-    </div>
-    <div class="stat">
-      <div class="stat-value"><span data-count="10">10</span><span class="plus">+</span></div>
-      <div class="stat-label">Departments on the team</div>
-    </div>
-  </section>
-
-  <!-- Competitions we fly at -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track"><span class="marquee-text">SAE Aero Design West</span><span class="marquee-star">✦</span><span class="marquee-text">Aerothon</span><span class="marquee-star">✦</span><span class="marquee-text">Techfest IIT Bombay</span><span class="marquee-star">✦</span><span class="marquee-text">NITK Drone Racing</span><span class="marquee-star">✦</span><span class="marquee-text">SAE-India</span><span class="marquee-star">✦</span><span class="marquee-text">ADDC 2026</span><span class="marquee-star">✦</span><span class="marquee-text">NACDEC</span><span class="marquee-star">✦</span><span class="marquee-text">ISRO IROC</span><span class="marquee-star">✦</span><span class="marquee-text">SAE Aero Design West</span><span class="marquee-star">✦</span><span class="marquee-text">Aerothon</span><span class="marquee-star">✦</span><span class="marquee-text">Techfest IIT Bombay</span><span class="marquee-star">✦</span><span class="marquee-text">NITK Drone Racing</span><span class="marquee-star">✦</span><span class="marquee-text">SAE-India</span><span class="marquee-star">✦</span><span class="marquee-text">ADDC 2026</span><span class="marquee-star">✦</span><span class="marquee-text">NACDEC</span><span class="marquee-star">✦</span><span class="marquee-text">ISRO IROC</span><span class="marquee-star">✦</span></div>
-  </div>
-
-  <!-- Explore -->
-  <section class="section">
+  <!-- Manifesto -->
+  <section class="section" id="manifesto">
     <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Flight plan</p>
-        <h2>Engineers trained on real constraints.</h2>
-        <p class="lead">From balsa-and-foam aeromodels to autonomous drones and research platforms built with DRDO — here’s where to start.</p>
-      </div>
-
-      <div class="grid grid--4">
-        <a class="explore-card reveal" href="about.html">
-          <img src="images/photo5.jpg" alt="" loading="lazy">
-          <span class="num">01</span>
-          <div class="body">
-            <h3>Who we are</h3>
-            <p>A multi-disciplinary team from 10+ departments, operating out of Propel Lab–3.</p>
-            <span class="go">Meet the club →</span>
-          </div>
-        </a>
-        <a class="explore-card reveal" href="build.html">
-          <img src="images/photo7.jpg" alt="" loading="lazy">
-          <span class="num">02</span>
-          <div class="body">
-            <h3>What we build</h3>
-            <p>Four competition teams and an R&amp;D pipeline from flight controllers to morphing wings.</p>
-            <span class="go">See the hangar →</span>
-          </div>
-        </a>
-        <a class="explore-card reveal" href="achievements.html">
-          <img src="images/photo3.jpg" alt="" loading="lazy">
-          <span class="num">03</span>
-          <div class="body">
-            <h3>Our achievements</h3>
-            <p>20+ podiums across SAE, Techfest and national drone racing since 2018.</p>
-            <span class="go">View the record →</span>
-          </div>
-        </a>
-        <a class="explore-card reveal" href="partners.html">
-          <img src="images/photo6.jpg" alt="" loading="lazy">
-          <span class="num">04</span>
-          <div class="body">
-            <h3>Partner with us</h3>
-            <p>Platinum, Gold, Silver and Technical tiers — reach the next generation of aerospace talent.</p>
-            <span class="go">Explore tiers →</span>
-          </div>
-        </a>
-      </div>
+      <p class="eyebrow">Who we are</p>
+      <p class="manifesto">AeroBMSCE is the aerospace and unmanned systems club of BMS College of Engineering. Since 2012, engineers from <em>more than ten departments</em> have designed, built and flown aircraft, drones and autonomous systems — and taken them to <em>podiums around the world.</em></p>
+      <p class="after-manifesto"><a class="link-arrow" href="about.html">Meet the club →</a></p>
     </div>
   </section>
 
-  <!-- Latest highlight -->
-  <section class="section section--alt">
+  <section class="section section--tight">
     <div class="container">
-      <div class="highlight reveal">
-        <img src="images/photo3.jpg" alt="AeroBMSCE team at SAE International Aero Design West in Fort Worth, Texas" loading="lazy">
-        <div class="body">
-          <p class="eyebrow">Latest · 2026 season</p>
-          <h3>2nd place internationally at SAE Aero Design West</h3>
-          <p>Awarded under the MATLAB Simulation Awards in Fort Worth, Texas, USA — and #16 globally in the Micro Class. Back home, the team also took 1st place for Unique Technology Development at ADDC 2026 (SAE Aerothon).</p>
-          <a class="text-link" href="achievements.html">Full results →</a>
-        </div>
+      <div class="numbers reveal" aria-label="AeroBMSCE in numbers">
+        <div class="number"><div class="number-value">2012</div><div class="number-label">Established</div></div>
+        <div class="number"><div class="number-value"><span data-count="75">75</span><span class="plus">+</span></div><div class="number-label">Projects completed</div></div>
+        <div class="number"><div class="number-value"><span data-count="20">20</span><span class="plus">+</span></div><div class="number-label">Podium finishes</div></div>
+        <div class="number"><div class="number-value"><span data-count="50">50</span><span class="plus">+</span></div><div class="number-label">Papers &amp; reports</div></div>
+        <div class="number"><div class="number-value"><span data-count="10">10</span><span class="plus">+</span></div><div class="number-label">Departments</div></div>
       </div>
     </div>
   </section>
 
-  <!-- Why it matters -->
+  <!-- What we build, with the drone model floating beside it -->
   <section class="section">
     <div class="container split">
       <div class="reveal">
-        <p class="eyebrow">Why it matters</p>
-        <h2>Real aircraft. Real deadlines. Real results.</h2>
-        <p class="lead">Every project goes from CAD to flight test. That makes our members industry-ready before they graduate — and makes our partners visible in the places that matter.</p>
-        <a class="text-link" href="about.html">More about us →</a>
+        <p class="eyebrow">What we build</p>
+        <h2>Four teams. One hangar.</h2>
+        <p class="lead">Fixed-wing aircraft for SAE Aero Design, multirotors for Aerothon, racing quads for national circuits — and a research pipeline from flight controllers to morphing wingtips.</p>
+        <p><a class="link-arrow" href="build.html">See the hangar →</a></p>
       </div>
-      <ul class="tick-list reveal">
-        <li>Engineers trained on real constraints</li>
-        <li>Talent exposure before graduation</li>
-        <li>Brand visibility in elite technical ecosystems</li>
-        <li>Industry-grade fabrication &amp; testing</li>
-      </ul>
+      <figure class="stage" data-scene="build" aria-label="Autonomy / Multirotor platform">
+          <img class="scene-fallback" src="images/photo7.jpg" alt="">
+          <figcaption>Autonomy / Multirotor platform</figcaption>
+          <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+        </figure>
     </div>
   </section>
 
-  <!-- Ecosystem logos -->
-  <section class="section section--alt">
+  <div class="word-marquee" aria-hidden="true">
+    <div class="marquee-track"><span>SAE Aero Design West</span><i>✦</i><span>Aerothon</span><i>✦</i><span>Techfest IIT Bombay</span><i>✦</i><span>NITK Drone Racing</span><i>✦</i><span>SAE-India</span><i>✦</i><span>ADDC 2026</span><i>✦</i><span>NACDEC</span><i>✦</i><span>ISRO IROC</span><i>✦</i><span>SAE Aero Design West</span><i>✦</i><span>Aerothon</span><i>✦</i><span>Techfest IIT Bombay</span><i>✦</i><span>NITK Drone Racing</span><i>✦</i><span>SAE-India</span><i>✦</i><span>ADDC 2026</span><i>✦</i><span>NACDEC</span><i>✦</i><span>ISRO IROC</span><i>✦</i></div>
+  </div>
+
+  <!-- Flight plan: links to every section, with a photo that follows the cursor -->
+  <section class="section">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
+        <p class="eyebrow">Flight plan</p>
+        <h2>Where to next?</h2>
+      </div>
+      <nav class="rows reveal" aria-label="Site sections">
+        <a class="row" href="about.html" data-preview="images/photo5.jpg">
+          <span class="row-num">01</span><h3>Who we are</h3>
+          <p>A multi-disciplinary team from 10+ departments, operating out of Propel Lab–3.</p><span class="row-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="row" href="build.html" data-preview="images/photo7.jpg">
+          <span class="row-num">02</span><h3>What we build</h3>
+          <p>Four competition teams and an R&amp;D pipeline from flight controllers to morphing wings.</p><span class="row-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="row" href="achievements.html" data-preview="images/photo1.jpg">
+          <span class="row-num">03</span><h3>Our achievements</h3>
+          <p>20+ podiums across SAE, Techfest and national drone racing since 2018.</p><span class="row-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="row" href="partners.html" data-preview="images/photo6.jpg">
+          <span class="row-num">04</span><h3>Partner with us</h3>
+          <p>Platinum, Gold, Silver and Technical tiers — reach the next generation of aerospace talent.</p><span class="row-arrow" aria-hidden="true">→</span>
+        </a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Latest result on a full-bleed photo -->
+  <section class="bleed" aria-label="Latest result">
+    <img src="images/photo3.jpg" alt="AeroBMSCE team at SAE International Aero Design West in Fort Worth, Texas" loading="lazy">
+    <div class="bleed-caption">
+      <div class="container">
+        <p class="eyebrow">Latest · 2026 season</p>
+        <h2>2nd place internationally at SAE Aero Design West.</h2>
+        <p class="lead">MATLAB Simulation Awards, Fort Worth, Texas — and #16 globally in the Micro Class. Back home: 1st place for Unique Technology Development at ADDC 2026.</p>
+        <a class="link-arrow" href="achievements.html">Full results →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
         <p class="eyebrow">Our ecosystem</p>
         <h2>Built with industry-standard tools.</h2>
       </div>
-      <div class="logo-marquee reveal">
-        <div class="marquee-track">
-          <div class="logo-tile"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"></div><div class="logo-tile"><img src="images/ansys.png" alt="Ansys" loading="lazy"></div><div class="logo-tile"><img src="images/altair.png" alt="Altair" loading="lazy"></div><div class="logo-tile"><img src="images/siemens.png" alt="Siemens" loading="lazy"></div><div class="logo-tile"><img src="images/flow5.png" alt="flow5" loading="lazy"></div><div class="logo-tile"><img src="images/simscale.png" alt="SimScale" loading="lazy"></div><div class="logo-tile"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"></div><div class="logo-tile"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"></div><div class="logo-tile"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"></div><div class="logo-tile"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"></div>
-          <div class="logo-dupe" aria-hidden="true"><div class="logo-tile"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"></div><div class="logo-tile"><img src="images/ansys.png" alt="Ansys" loading="lazy"></div><div class="logo-tile"><img src="images/altair.png" alt="Altair" loading="lazy"></div><div class="logo-tile"><img src="images/siemens.png" alt="Siemens" loading="lazy"></div><div class="logo-tile"><img src="images/flow5.png" alt="flow5" loading="lazy"></div><div class="logo-tile"><img src="images/simscale.png" alt="SimScale" loading="lazy"></div><div class="logo-tile"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"></div><div class="logo-tile"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"></div><div class="logo-tile"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"></div><div class="logo-tile"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"></div></div>
-        </div>
-      </div>
+    </div>
+    <div class="logo-marquee reveal">
+      <div class="marquee-track"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"><img src="images/ansys.png" alt="Ansys" loading="lazy"><img src="images/altair.png" alt="Altair" loading="lazy"><img src="images/siemens.png" alt="Siemens" loading="lazy"><img src="images/flow5.png" alt="flow5" loading="lazy"><img src="images/simscale.png" alt="SimScale" loading="lazy"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"><span class="logo-dupe" aria-hidden="true"><img src="images/solidworks.png" alt="" loading="lazy"><img src="images/ansys.png" alt="" loading="lazy"><img src="images/altair.png" alt="" loading="lazy"><img src="images/siemens.png" alt="" loading="lazy"><img src="images/flow5.png" alt="" loading="lazy"><img src="images/simscale.png" alt="" loading="lazy"><img src="images/drkstore.png" alt="" loading="lazy"><img src="images/uav-marketplace.png" alt="" loading="lazy"><img class="keep-colour" src="images/drdo.png" alt="" loading="lazy"><img src="images/csir-nal.png" alt="" loading="lazy"></span></div>
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="section">
-    <div class="container">
-      <div class="cta-band reveal">
-        <div>
-          <h2>Help us take the next aircraft further.</h2>
-          <p>Sponsorship funds travel, logistics and fabrication for national and international competitions.</p>
-        </div>
-        <a class="btn btn--ghost" href="partners.html">Become a partner <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
+    <div class="container big-cta reveal">
+      <p class="eyebrow">Let’s fly together</p>
+      <a href="partners.html">Partner with us <span aria-hidden="true">↗</span></a>
+      <p class="lead">Sponsorship funds travel, logistics and fabrication for national and international competitions.</p>
     </div>
   </section>
 
@@ -220,9 +188,9 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="badge"><img src="images/header-logo.png" alt="AeroBMSCE" width="1688" height="454"></span>
-        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru.</p>
+      <div>
+        <h4>AeroBMSCE</h4>
+        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru. Flying since 2012.</p>
       </div>
       <div>
         <h4>Explore</h4>
@@ -243,6 +211,7 @@
         </ul>
       </div>
     </div>
+    <div class="footer-wordmark" aria-hidden="true">AEROBMSCE</div>
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> AeroBMSCE</span>
       <span>Recruitment task build — not the official website</span>

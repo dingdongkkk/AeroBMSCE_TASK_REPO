@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <meta name="description" content="Partner with AeroBMSCE — collaboration tiers, upcoming competitions and how sponsors help us fly.">
+  <meta name="theme-color" content="#0b0a09">
   <title>Partner With Us — AeroBMSCE</title>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="images/eagle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +19,9 @@
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
     } }
   </script>
-  <script type="module" src="logo3d.js"></script>
+  <!-- world.js: the shared 3D sky behind every page; the others draw this page's models -->
+  <script type="module" src="world.js"></script>
+  <script type="module" src="page-scenes.js"></script>
 </head>
 <body>
 
@@ -28,7 +31,8 @@
 <header class="site-header">
   <div class="container">
     <a class="brand" href="index.html" aria-label="AeroBMSCE home">
-      <img src="images/header-logo.png" alt="AeroBMSCE — Above Gravity, Beyond Limits" width="1688" height="454">
+      <img src="images/eagle.svg" alt="" width="48" height="22">
+      <span class="brand-name">AEROBMSCE<small>Above gravity · Beyond limits</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
@@ -43,70 +47,56 @@
 
 <main id="main">
 
-  <section class="page-hero" data-logo3d="mini">
+  <section class="page-hero">
+    <figure class="scene-panel" data-scene="partners" aria-label="Connection / Orbital platform">
+      <img class="scene-fallback" src="images/photo6.jpg" alt="">
+      <figcaption><span>Connection / Orbital platform</span></figcaption>
+      <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+    </figure>
     <div class="container">
       <p class="eyebrow">04 / Partner with us</p>
       <h1>Fuel the next flight.</h1>
       <p class="lead">We have a flight-proven product ready for the world stage. Partners help us get it there — and get early access to the engineers who built it.</p>
-      <div class="hero-actions page-hero-actions">
+      <div class="actions">
         <a class="btn btn--gold" href="#tiers">View tiers <span class="arrow" aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost-light" href="#contact">Contact us</a>
+        <a class="btn" href="#contact">Contact us</a>
       </div>
     </div>
   </section>
 
-  <!-- What's next -->
+  <!-- Upcoming competitions -->
   <section class="section">
-    <div class="container split">
-      <div class="reveal">
+    <div class="container">
+      <div class="section-head">
         <p class="eyebrow">What’s next for us</p>
         <h2>Upcoming competitions, 2026 &amp; 2027.</h2>
         <p class="lead">We aim to represent our institution at these prestigious aerospace and UAV competitions.</p>
       </div>
-      <ul class="upcoming reveal">
-        <li><strong>NACDEC 2026</strong><span>Aeronautical Society of India</span></li>
-        <li><strong>ISRO IROC</strong><span>International Rover Challenge — ISRO track</span></li>
-        <li><strong>NITK Drone Racing 2026</strong><span>National drone racing</span></li>
-        <li><strong>SAE Aero Design West 2027</strong><span>SAE International · USA</span></li>
-        <li><strong>SAE Aerothon 2027</strong><span>SAE India</span></li>
+      <ul class="rows reveal">
+        <li class="row"><span class="row-num">2026</span><h3>NACDEC 2026</h3><p>Organised by the Aeronautical Society of India.</p><span></span></li>
+        <li class="row"><span class="row-num">2026</span><h3>ISRO IROC</h3><p>International Rover Challenge — ISRO track.</p><span></span></li>
+        <li class="row"><span class="row-num">2026</span><h3>NITK Drone Racing</h3><p>National drone racing competition.</p><span></span></li>
+        <li class="row"><span class="row-num">2027</span><h3>SAE Aero Design West</h3><p>SAE International, USA.</p><span></span></li>
+        <li class="row"><span class="row-num">2027</span><h3>SAE Aerothon</h3><p>SAE India.</p><span></span></li>
       </ul>
     </div>
   </section>
 
   <!-- How partners help -->
-  <section class="section section--alt">
-    <div class="container">
-      <div class="section-head reveal">
+  <section class="section section--tight">
+    <div class="container split split--top">
+      <div class="reveal">
         <p class="eyebrow">Strategic project status</p>
-        <h2>How our partners enable this.</h2>
+        <p class="huge-number">100%</p>
+        <p class="lead">of the research, development and technical fabrication for our current flight systems is subsidised by the R&amp;D department at BMS College of Engineering.</p>
       </div>
-      <div class="grid grid--4">
-        <article class="card status-card reveal">
-          <div class="big">100%</div>
-          <h3>R&amp;D subsidised</h3>
-          <p>All research, development and fabrication for our current flight systems is funded by the BMSCE R&amp;D department.</p>
-        </article>
-        <article class="card icon-card reveal">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <h3>Financial sponsorship</h3>
-          <p>Support for travel, accommodation and logistics at competitions.</p>
-        </article>
-        <article class="card icon-card reveal">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-          </div>
-          <h3>Academic &amp; research guidance</h3>
-          <p>Mentorship and technical expertise that sharpen our designs.</p>
-        </article>
-        <article class="card icon-card reveal">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
-          </div>
-          <h3>Opportunity &amp; exposure</h3>
-          <p>Access to new competitions, industry networks and platforms.</p>
-        </article>
+      <div class="reveal">
+        <h2>How our partners enable this.</h2>
+        <ul class="ticks">
+          <li><strong>Financial sponsorship</strong> — travel, accommodation and logistics</li>
+          <li><strong>Academic &amp; research guidance</strong></li>
+          <li><strong>Opportunity &amp; exposure</strong></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -114,17 +104,15 @@
   <!-- Tiers -->
   <section class="section" id="tiers">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <p class="eyebrow">Collaboration tiers</p>
         <h2>Choose how you fly with us.</h2>
       </div>
-      <div class="grid grid--4">
-        <article class="card tier tier--platinum reveal">
-          <div class="tier-head">
-            <img src="images/icon-platinum.png" alt="">
-            <h3>Platinum Partner</h3>
-            <p>Title partner · Strategic alignment</p>
-          </div>
+      <div class="tiers reveal">
+        <article class="tier tier--platinum">
+          <div class="tier-rank"><img src="images/icon-platinum.png" alt="">Platinum</div>
+          <h3>Platinum Partner</h3>
+          <p class="tier-sub">Title partner · Strategic alignment</p>
           <ul>
             <li>Primary logo on aircraft &amp; UAV models</li>
             <li>Logo placement and verbal acknowledgement in official videos and key events</li>
@@ -134,12 +122,10 @@
             <li>Association with flagship projects &amp; major events</li>
           </ul>
         </article>
-        <article class="card tier tier--gold reveal">
-          <div class="tier-head">
-            <img src="images/icon-gold.png" alt="">
-            <h3>Gold Partner</h3>
-            <p>High visibility · Competition presence</p>
-          </div>
+        <article class="tier tier--gold">
+          <div class="tier-rank"><img src="images/icon-gold.png" alt="">Gold</div>
+          <h3>Gold Partner</h3>
+          <p class="tier-sub">High visibility · Competition presence</p>
           <ul>
             <li>Secondary logo on selected aircraft models</li>
             <li>Logo on team uniforms &amp; presentations</li>
@@ -149,12 +135,10 @@
             <li>Presence at national &amp; international competitions</li>
           </ul>
         </article>
-        <article class="card tier tier--silver reveal">
-          <div class="tier-head">
-            <img src="images/icon-silver.png" alt="">
-            <h3>Silver Partner</h3>
-            <p>Event &amp; media visibility</p>
-          </div>
+        <article class="tier tier--silver">
+          <div class="tier-rank"><img src="images/icon-silver.png" alt="">Silver</div>
+          <h3>Silver Partner</h3>
+          <p class="tier-sub">Event &amp; media visibility</p>
           <ul>
             <li>Logo on team uniforms</li>
             <li>Logo on presentations &amp; project materials</li>
@@ -164,12 +148,10 @@
             <li>Visibility at select AeroBMSCE events</li>
           </ul>
         </article>
-        <article class="card tier tier--tech reveal">
-          <div class="tier-head">
-            <img src="images/icon-technical.png" alt="">
-            <h3>Technical &amp; Ecosystem</h3>
-            <p>Design · Simulation · Analysis</p>
-          </div>
+        <article class="tier tier--tech">
+          <div class="tier-rank"><img src="images/icon-technical.png" alt="">Technical</div>
+          <h3>Technical &amp; Ecosystem</h3>
+          <p class="tier-sub">Design · Simulation · Analysis</p>
           <ul>
             <li>Tools showcased in design &amp; competition reports</li>
             <li>Credit in technical presentations &amp; submissions</li>
@@ -184,27 +166,18 @@
   </section>
 
   <!-- Outcomes -->
-  <section class="section section--dark">
+  <section class="section">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <p class="eyebrow">Why partner with us</p>
         <h2>Partner outcomes.</h2>
       </div>
-      <div class="grid grid--3">
-        <div class="reveal">
-          <div class="outcome-num">20,000+</div>
-          <p>Digital impressions — high-impact brand visibility at scale.</p>
-        </div>
-        <div class="reveal">
-          <div class="outcome-num">50,000+</div>
-          <p>On-ground impressions at competitions, exhibitions and events.</p>
-        </div>
-        <div class="reveal">
-          <div class="outcome-num">Global</div>
-          <p>Association with nationally &amp; internationally ranked teams.</p>
-        </div>
+      <div class="big-numbers reveal">
+        <div><strong>20,000+</strong><p>Digital impressions — high-impact brand visibility at scale.</p></div>
+        <div><strong>50,000+</strong><p>On-ground impressions at competitions, exhibitions and events.</p></div>
+        <div><strong>Global</strong><p>Association with nationally &amp; internationally ranked teams.</p></div>
       </div>
-      <ul class="tick-list reveal outcome-list">
+      <ul class="ticks ticks--spaced reveal">
         <li>Early access to industry-ready aerospace &amp; UAV talent</li>
         <li>Technical credibility through real-world flight systems &amp; deployments</li>
         <li>Premium brand positioning within elite engineering ecosystems — SAE competitions and IIT techfests</li>
@@ -213,55 +186,41 @@
   </section>
 
   <!-- Ecosystem -->
-  <section class="section">
+  <section class="section section--tight">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <p class="eyebrow">Our collaboration ecosystem</p>
         <h2>Who we already work with.</h2>
       </div>
-
       <div class="logo-group reveal">
         <h3>Design, simulation &amp; engineering software</h3>
-        <div class="logo-wall">
-          <div class="logo-tile"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"></div>
-          <div class="logo-tile"><img src="images/ansys.png" alt="Ansys" loading="lazy"></div>
-          <div class="logo-tile"><img src="images/altair.png" alt="Altair" loading="lazy"></div>
-          <div class="logo-tile"><img src="images/siemens.png" alt="Siemens" loading="lazy"></div>
-          <div class="logo-tile"><img src="images/flow5.png" alt="flow5" loading="lazy"></div>
-          <div class="logo-tile"><img src="images/simscale.png" alt="SimScale" loading="lazy"></div>
-        </div>
+        <div class="logos"><img src="images/solidworks.png" alt="SOLIDWORKS" loading="lazy"><img src="images/ansys.png" alt="Ansys" loading="lazy"><img src="images/altair.png" alt="Altair" loading="lazy"><img src="images/siemens.png" alt="Siemens" loading="lazy"><img src="images/flow5.png" alt="flow5" loading="lazy"><img src="images/simscale.png" alt="SimScale" loading="lazy"></div>
       </div>
-
       <div class="logo-group reveal">
-        <h3>UAV hardware &amp; component ecosystem</h3>
-        <div class="logo-wall">
-          <div class="logo-tile"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"></div>
-          <div class="logo-tile"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"></div>
-        </div>
+        <h3>UAV hardware &amp; components</h3>
+        <div class="logos"><img src="images/drkstore.png" alt="DRK Store" loading="lazy"><img src="images/uav-marketplace.png" alt="UAV Marketplace" loading="lazy"></div>
       </div>
-
       <div class="logo-group reveal">
-        <h3>Academic &amp; research interaction</h3>
-        <div class="logo-wall">
-          <div class="logo-tile"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"></div>
-          <div class="logo-tile"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"></div>
-        </div>
+        <h3>Academic &amp; research</h3>
+        <div class="logos"><img class="keep-colour" src="images/drdo.png" alt="DRDO" loading="lazy"><img src="images/csir-nal.png" alt="CSIR-NAL" loading="lazy"></div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section class="section section--alt" id="contact">
-    <div class="container">
-      <div class="contact-card reveal">
-        <div>
-          <p class="eyebrow">Contact us</p>
-          <h2>Let’s build something that flies.</h2>
-          <p class="who">Rajesh — Partnership Head</p>
-          <a class="email" href="mailto:aerobmsce@bmsce.ac.in?subject=Partnership%20with%20AeroBMSCE">aerobmsce@bmsce.ac.in</a>
-        </div>
-        <img src="images/cad-plane.png" alt="CAD model of an AeroBMSCE aircraft airframe" loading="lazy">
+  <!-- Contact, with the 3D eagle -->
+  <section class="section" id="contact">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Contact us</p>
+        <h2>Let’s build something that flies.</h2>
+        <p class="lead">Rajesh — Partnership Head</p>
+        <a class="email-link" href="mailto:aerobmsce@bmsce.ac.in?subject=Partnership%20with%20AeroBMSCE">aerobmsce@bmsce.ac.in</a>
       </div>
+      <figure class="stage" data-scene="index" aria-label="AeroBMSCE / Emblem">
+          <img class="scene-fallback" src="images/eagle.svg" alt="">
+          <figcaption>AeroBMSCE / Emblem</figcaption>
+          <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+        </figure>
     </div>
   </section>
 
@@ -270,9 +229,9 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="badge"><img src="images/header-logo.png" alt="AeroBMSCE" width="1688" height="454"></span>
-        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru.</p>
+      <div>
+        <h4>AeroBMSCE</h4>
+        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru. Flying since 2012.</p>
       </div>
       <div>
         <h4>Explore</h4>
@@ -293,6 +252,7 @@
         </ul>
       </div>
     </div>
+    <div class="footer-wordmark" aria-hidden="true">AEROBMSCE</div>
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> AeroBMSCE</span>
       <span>Recruitment task build — not the official website</span>

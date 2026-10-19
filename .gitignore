@@ -2,3 +2,7 @@
 .claude/
 .vercel
 .env*
+
+# Local browser verification artifacts
+.playwright-cli/
+output/playwright/

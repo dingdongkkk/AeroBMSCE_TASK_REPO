@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <meta name="description" content="Who we are — AeroBMSCE, the aerospace and unmanned systems club of BMS College of Engineering, established in 2012.">
+  <meta name="theme-color" content="#0b0a09">
   <title>Who We Are — AeroBMSCE</title>
-  <link rel="icon" href="images/logo.png">
+  <link rel="icon" href="images/eagle.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +19,9 @@
       "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
     } }
   </script>
-  <script type="module" src="logo3d.js"></script>
+  <!-- world.js: the shared 3D sky behind every page; the others draw this page's models -->
+  <script type="module" src="world.js"></script>
+  <script type="module" src="page-scenes.js"></script>
 </head>
 <body>
 
@@ -28,7 +31,8 @@
 <header class="site-header">
   <div class="container">
     <a class="brand" href="index.html" aria-label="AeroBMSCE home">
-      <img src="images/header-logo.png" alt="AeroBMSCE — Above Gravity, Beyond Limits" width="1688" height="454">
+      <img src="images/eagle.svg" alt="" width="48" height="22">
+      <span class="brand-name">AEROBMSCE<small>Above gravity · Beyond limits</small></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Main">
@@ -43,10 +47,15 @@
 
 <main id="main">
 
-  <section class="page-hero" data-logo3d="mini">
+  <section class="page-hero">
+    <figure class="scene-panel" data-scene="about" aria-label="Propulsion / Turbine assembly">
+      <img class="scene-fallback" src="images/photo5.jpg" alt="">
+      <figcaption><span>Propulsion / Turbine assembly</span></figcaption>
+      <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+    </figure>
     <div class="container">
       <p class="eyebrow">01 / Who we are</p>
-      <h1>A flight crew of engineers from every discipline.</h1>
+      <h1>Different disciplines. One flight crew.</h1>
       <p class="lead">The official aerospace, aeromodelling and unmanned systems innovation club of BMS College of Engineering.</p>
     </div>
   </section>
@@ -59,69 +68,47 @@
         <h2>Designing, building and testing since 2012.</h2>
         <p class="lead">AeroBMSCE operates from <strong>Propel Lab–3</strong> at BMS College of Engineering. Established in 2012, the club brings together engineers from 10+ departments to design, build, and test advanced aircraft, drones, and autonomous systems.</p>
         <p>Since we started, we’ve taken on and completed 75+ projects and produced 50+ research papers, reports and certifications — work that reflects the creativity and dedication of our members.</p>
-
-        <dl class="fact-list">
-          <div class="fact"><dt>Founded</dt><dd>2012</dd></div>
-          <div class="fact"><dt>Home base</dt><dd>Propel Lab–3</dd></div>
-          <div class="fact"><dt>Disciplines</dt><dd>10+ departments</dd></div>
+        <dl class="facts">
+          <div><dt>Founded</dt><dd>2012</dd></div>
+          <div><dt>Home base</dt><dd>Propel Lab–3</dd></div>
+          <div><dt>Disciplines</dt><dd>10+ departments</dd></div>
         </dl>
       </div>
-      <div class="photo-stack reveal">
-        <img src="images/photo5.jpg" alt="AeroBMSCE members gathered for a group photo in the lab">
-        <img src="images/photo4.jpg" alt="The team outside Prathyusha Engineering College at a competition">
-      </div>
+      <img class="photo reveal" src="images/photo5.jpg" alt="AeroBMSCE members gathered for a group photo in the lab">
     </div>
   </section>
 
   <!-- What we do -->
-  <section class="section section--alt">
+  <section class="section">
     <div class="container">
-      <div class="section-head reveal">
+      <div class="section-head">
         <p class="eyebrow">What we do</p>
-        <h2>Four things we do every season.</h2>
+        <h2>Four things, every season.</h2>
       </div>
-      <div class="grid grid--4">
-        <article class="card icon-card reveal">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
-          </div>
-          <h3>Aircraft &amp; UAV design</h3>
-          <p>Competitive fixed-wing and UAV design for SAE and national contests.</p>
-        </article>
-        <article class="card icon-card reveal">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="3"/><circle cx="19" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M7 7l3 3M17 7l-3 3M7 17l3-3M17 17l-3-3"/><rect x="10" y="10" width="4" height="4" rx="1"/></svg>
-          </div>
-          <h3>Drone racing &amp; autonomy</h3>
-          <p>Racing quads and autonomous drones that navigate on their own.</p>
-        </article>
-        <article class="card icon-card reveal">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <h3>Fabrication &amp; testing</h3>
-          <p>Industry-grade fabrication, ground tests and flight tests in-house.</p>
-        </article>
-        <article class="card icon-card reveal">
-          <div class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-          </div>
-          <h3>Talent development</h3>
-          <p>Learning by doing — real engineering on real deadlines.</p>
-        </article>
+      <ul class="rows reveal">
+        <li class="row"><span class="row-num">01</span><h3>Aircraft &amp; UAV design</h3><p>Competitive fixed-wing and UAV design for SAE and national contests.</p><span></span></li>
+        <li class="row"><span class="row-num">02</span><h3>Drone racing &amp; autonomy</h3><p>Racing quads and autonomous drones that navigate on their own.</p><span></span></li>
+        <li class="row"><span class="row-num">03</span><h3>Fabrication &amp; testing</h3><p>Industry-grade fabrication, ground tests and flight tests in-house.</p><span></span></li>
+        <li class="row"><span class="row-num">04</span><h3>Talent development</h3><p>Learning by doing — real engineering on real deadlines.</p><span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Full-bleed photo -->
+  <section class="bleed" aria-label="On the road">
+    <img src="images/photo4.jpg" alt="AeroBMSCE team outside Prathyusha Engineering College at a competition" loading="lazy">
+    <div class="bleed-caption">
+      <div class="container">
+        <p class="eyebrow">Why it matters</p>
+        <h2>The value goes beyond the trophy.</h2>
       </div>
     </div>
   </section>
 
-  <!-- Why it matters -->
-  <section class="section">
-    <div class="container split">
-      <div class="reveal">
-        <p class="eyebrow">Why it matters</p>
-        <h2>The value goes beyond the trophy.</h2>
-        <p class="lead">Competing at a global level teaches what a classroom can’t — and gives the companies that back us a direct line to that talent.</p>
-      </div>
-      <ul class="tick-list reveal">
+  <section class="section section--tight">
+    <div class="container split split--top">
+      <p class="lead reveal">Competing at a global level teaches what a classroom can’t — and gives the companies that back us a direct line to that talent.</p>
+      <ul class="ticks reveal">
         <li>Engineers trained on real constraints</li>
         <li>Talent exposure before graduation</li>
         <li>Brand visibility in elite technical ecosystems</li>
@@ -129,25 +116,26 @@
     </div>
   </section>
 
-  <!-- Vision -->
-  <section class="section section--dark">
-    <div class="container">
-      <p class="eyebrow">Our vision</p>
-      <p class="vision reveal">A leading aerospace and unmanned systems research group, renowned for <span>design excellence, innovation and competitive success.</span></p>
-      <p class="lead reveal vision-note">We aim to cultivate future leaders in the aerospace and drone industry, establishing a legacy of engineering excellence that inspires students worldwide.</p>
+  <!-- Vision, with the 3D eagle -->
+  <section class="section">
+    <div class="container split">
+      <figure class="stage" data-scene="index" aria-label="AeroBMSCE / Emblem">
+          <img class="scene-fallback" src="images/eagle.svg" alt="">
+          <figcaption>AeroBMSCE / Emblem</figcaption>
+          <button class="scene-toggle" type="button" aria-pressed="false" hidden>Pause motion</button>
+        </figure>
+      <div>
+        <p class="eyebrow">Our vision</p>
+        <p class="manifesto">A leading aerospace and unmanned systems research group, renowned for <em>design excellence, innovation and competitive success</em> — cultivating future leaders of the aerospace and drone industry.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Next -->
   <section class="section">
-    <div class="container">
-      <div class="cta-band reveal">
-        <div>
-          <h2>See what we build.</h2>
-          <p>Meet our four competition teams and the research we’re flying next.</p>
-        </div>
-        <a class="btn btn--ghost" href="build.html">What we build <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
+    <div class="container big-cta reveal">
+      <p class="eyebrow">Next</p>
+      <a href="build.html">What we build <span aria-hidden="true">↗</span></a>
+      <p class="lead">Meet our four competition teams and the research we’re flying next.</p>
     </div>
   </section>
 
@@ -156,9 +144,9 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="badge"><img src="images/header-logo.png" alt="AeroBMSCE" width="1688" height="454"></span>
-        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru.</p>
+      <div>
+        <h4>AeroBMSCE</h4>
+        <p>The aerospace, aeromodelling and unmanned systems club of BMS College of Engineering, Bengaluru. Flying since 2012.</p>
       </div>
       <div>
         <h4>Explore</h4>
@@ -179,6 +167,7 @@
         </ul>
       </div>
     </div>
+    <div class="footer-wordmark" aria-hidden="true">AEROBMSCE</div>
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> AeroBMSCE</span>
       <span>Recruitment task build — not the official website</span>

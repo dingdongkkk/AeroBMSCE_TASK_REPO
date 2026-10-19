@@ -27,6 +27,21 @@ function setupNav() {
   });
 }
 
+/* ---------- Helper: reveal elements that are already on screen ----------
+   IntersectionObserver can miss its first callback while the browser is
+   still fading the new page in (view transitions), so anything already in
+   view on load is revealed directly as a safety net. */
+function revealOnScreenSoon(elements) {
+  function check() {
+    elements.forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) el.classList.add("is-visible");
+    });
+  }
+  window.addEventListener("load", check);
+  setTimeout(check, 600);
+}
+
 /* ---------- Fade sections in as they scroll into view ---------- */
 function setupReveal() {
   var items = document.querySelectorAll(".reveal");
@@ -45,6 +60,7 @@ function setupReveal() {
   }, { threshold: 0.12 });
 
   items.forEach(function (el) { observer.observe(el); });
+  revealOnScreenSoon(items);
 }
 
 /* ---------- Count-up numbers in the stats strip ---------- */
@@ -80,55 +96,6 @@ function setupCounters() {
   }, { threshold: 0.5 });
 
   counters.forEach(function (el) { observer.observe(el); });
-}
-
-/* ---------- Photo carousel (replaces the old 2-second image swap) ---------- */
-function setupCarousel() {
-  var carousel = document.querySelector(".carousel");
-  if (!carousel) return;
-
-  var track = carousel.querySelector(".carousel-track");
-  var slides = carousel.querySelectorAll(".carousel-slide");
-  var dotsBox = carousel.querySelector(".carousel-dots");
-  var current = 0;
-  var timer = null;
-
-  // Build one dot per slide
-  slides.forEach(function (_, index) {
-    var dot = document.createElement("button");
-    dot.type = "button";
-    dot.setAttribute("aria-label", "Show photo " + (index + 1));
-    dot.addEventListener("click", function () { goTo(index); restart(); });
-    dotsBox.appendChild(dot);
-  });
-  var dots = dotsBox.querySelectorAll("button");
-
-  function goTo(index) {
-    current = (index + slides.length) % slides.length;
-    track.style.transform = "translateX(-" + current * 100 + "%)";
-    dots.forEach(function (dot, i) {
-      dot.setAttribute("aria-current", i === current ? "true" : "false");
-    });
-    slides.forEach(function (slide, i) {
-      slide.setAttribute("aria-hidden", i === current ? "false" : "true");
-    });
-  }
-
-  function restart() {
-    clearInterval(timer);
-    timer = setInterval(function () { goTo(current + 1); }, 5000);
-  }
-
-  carousel.querySelector("[data-prev]").addEventListener("click", function () { goTo(current - 1); restart(); });
-  carousel.querySelector("[data-next]").addEventListener("click", function () { goTo(current + 1); restart(); });
-
-  // Pause while the user is looking at / interacting with it
-  carousel.addEventListener("mouseenter", function () { clearInterval(timer); });
-  carousel.addEventListener("mouseleave", restart);
-  carousel.addEventListener("focusin", function () { clearInterval(timer); });
-
-  goTo(0);
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) restart();
 }
 
 /* ---------- Filter achievements by season ---------- */
@@ -188,82 +155,39 @@ function setupProgressBar() {
   update();
 }
 
-/* ---------- Cursor ring that follows the mouse (desktop only) ---------- */
-function setupCursor() {
-  var finePointer = window.matchMedia("(pointer: fine)").matches;
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!finePointer || reduceMotion) return;
-
-  var ring = document.createElement("div");
-  ring.className = "cursor-ring";
-  document.body.appendChild(ring);
-
-  var target = { x: 0, y: 0 };
-  var pos = { x: 0, y: 0 };
-
-  window.addEventListener("pointermove", function (event) {
-    target.x = event.clientX;
-    target.y = event.clientY;
-    ring.classList.add("is-on");
-    var interactive = event.target.closest("a, button, [data-lightbox]");
-    ring.classList.toggle("is-hover", !!interactive);
-  }, { passive: true });
-  document.addEventListener("pointerleave", function () { ring.classList.remove("is-on"); });
-
-  (function follow() {
-    // ease the ring towards the pointer for a smooth trailing effect
-    pos.x += (target.x - pos.x) * 0.2;
-    pos.y += (target.y - pos.y) * 0.2;
-    ring.style.transform = "translate(" + pos.x + "px," + pos.y + "px)";
-    requestAnimationFrame(follow);
-  })();
-}
-
-/* ---------- Buttons that lean towards the cursor ---------- */
-function setupMagnetic() {
-  if (!window.matchMedia("(pointer: fine)").matches) return;
-
-  document.querySelectorAll(".magnetic").forEach(function (el) {
-    el.addEventListener("pointermove", function (event) {
-      var rect = el.getBoundingClientRect();
-      var dx = event.clientX - (rect.left + rect.width / 2);
-      var dy = event.clientY - (rect.top + rect.height / 2);
-      el.style.transform = "translate(" + dx * 0.22 + "px," + dy * 0.32 + "px)";
-    });
-    el.addEventListener("pointerleave", function () { el.style.transform = ""; });
-  });
+/* ---------- Header turns to frosted glass once you scroll ---------- */
+function setupHeaderState() {
+  var header = document.querySelector(".site-header");
+  if (!header) return;
+  function update() { header.classList.toggle("is-scrolled", window.scrollY > 40); }
+  window.addEventListener("scroll", update, { passive: true });
+  update();
 }
 
 /* ---------- Headings reveal word by word ---------- */
 function setupSplitHeadings() {
-  var headings = document.querySelectorAll(".section-head h2, .page-hero h1, .cta-band h2");
+  var headings = document.querySelectorAll(".section-head h2, .page-hero h1, .bleed-caption h2, .split h2");
   if (!headings.length || !("IntersectionObserver" in window)) return;
 
-  var wordIndex = 0;
-
   // Wrap each word of every text node in <span class="split-word"><span>word</span></span>
-  function wrapWords(node) {
+  function wrapWords(node, counter) {
     Array.prototype.slice.call(node.childNodes).forEach(function (child) {
       if (child.nodeType === 3) {
-        var parts = child.textContent.split(/(\s+)/);
         var fragment = document.createDocumentFragment();
-        parts.forEach(function (part) {
+        child.textContent.split(/(\s+)/).forEach(function (part) {
           if (!part) return;
-          if (/^\s+$/.test(part)) {
-            fragment.appendChild(document.createTextNode(part));
-            return;
-          }
+          if (/^\s+$/.test(part)) { fragment.appendChild(document.createTextNode(part)); return; }
           var outer = document.createElement("span");
-          outer.className = "split-word";
           var inner = document.createElement("span");
-          inner.style.setProperty("--i", wordIndex++);
+          outer.className = "split-word";
+          inner.style.setProperty("--i", counter.i++);
           inner.textContent = part;
           outer.appendChild(inner);
           fragment.appendChild(outer);
         });
         node.replaceChild(fragment, child);
-      } else if (child.nodeType === 1) {
-        wrapWords(child);
+      } else if (child.nodeType === 1 && child.tagName !== "BR") {
+        wrapWords(child, counter);
       }
     });
   }
@@ -278,32 +202,126 @@ function setupSplitHeadings() {
   }, { threshold: 0.2 });
 
   headings.forEach(function (heading) {
-    wordIndex = 0;
-    wrapWords(heading);
+    wrapWords(heading, { i: 0 });
     heading.classList.add("split-heading");
     observer.observe(heading);
-  });
+  });  revealOnScreenSoon(headings);
 }
 
-/* ---------- Explore cards tilt in 3D under the pointer ---------- */
-function setupTilt() {
-  if (!window.matchMedia("(pointer: fine)").matches) return;
+/* ---------- Manifesto: words light up as you scroll through it ---------- */
+function setupManifesto() {
+  var block = document.querySelector(".manifesto");
+  if (!block) return;
 
-  document.querySelectorAll(".explore-card").forEach(function (card) {
-    card.addEventListener("pointermove", function (event) {
-      var rect = card.getBoundingClientRect();
-      var x = (event.clientX - rect.left) / rect.width;  // 0..1
-      var y = (event.clientY - rect.top) / rect.height; // 0..1
-      card.style.setProperty("--ry", (x - 0.5) * 10 + "deg");
-      card.style.setProperty("--rx", (0.5 - y) * 10 + "deg");
-      card.style.setProperty("--mx", x * 100 + "%");
-      card.style.setProperty("--my", y * 100 + "%");
+  // split into word spans, keeping <em> words gold
+  var words = [];
+  Array.prototype.slice.call(block.childNodes).forEach(function (child) {
+    var isGold = child.nodeType === 1;
+    var fragment = document.createDocumentFragment();
+    child.textContent.split(/(\s+)/).forEach(function (part) {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { fragment.appendChild(document.createTextNode(part)); return; }
+      var span = document.createElement("span");
+      span.className = "w" + (isGold ? " w-gold" : "");
+      span.textContent = part;
+      words.push(span);
+      fragment.appendChild(span);
     });
-    card.addEventListener("pointerleave", function () {
-      card.style.setProperty("--rx", "0deg");
-      card.style.setProperty("--ry", "0deg");
+    block.replaceChild(fragment, child);
+  });
+
+  function update() {
+    var rect = block.getBoundingClientRect();
+    // 0 when the block enters from the bottom, 1 when it reaches the upper third
+    var progress = (window.innerHeight * 0.85 - rect.top) / (rect.height + window.innerHeight * 0.35);
+    var lit = Math.round(Math.max(0, Math.min(1, progress)) * words.length);
+    words.forEach(function (word, i) { word.classList.toggle("is-lit", i < lit); });
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+}
+
+/* ---------- Horizontal reel: vertical scrolling moves the photos sideways ---------- */
+function setupReel() {
+  var reel = document.querySelector(".reel");
+  if (!reel) return;
+  var track = reel.querySelector(".reel-track");
+
+  function layout() {
+    if (window.innerWidth <= 860) { reel.style.height = ""; return; }
+    // make the section tall enough to scroll the full width of the track
+    var distance = track.scrollWidth - window.innerWidth;
+    reel.style.height = (window.innerHeight + distance) + "px";
+    update();
+  }
+  function update() {
+    if (window.innerWidth <= 860) return;
+    var rect = reel.getBoundingClientRect();
+    var distance = track.scrollWidth - window.innerWidth;
+    var progress = Math.max(0, Math.min(1, -rect.top / Math.max(rect.height - window.innerHeight, 1)));
+    track.style.transform = "translateX(" + (-distance * progress) + "px)";
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", layout);
+  window.addEventListener("load", layout);
+  layout();
+}
+
+/* ---------- Full-bleed photos drift slower than the page (parallax) ---------- */
+function setupParallax() {
+  var images = document.querySelectorAll(".bleed img");
+  if (!images.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  function update() {
+    images.forEach(function (img) {
+      var rect = img.parentElement.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      var offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * -0.12;
+      img.style.transform = "translateY(" + offset + "px)";
+    });
+  }
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+}
+
+/* ---------- Linked rows show a photo that follows the pointer ---------- */
+function setupRowPreview() {
+  var rows = document.querySelectorAll("a.row[data-preview]");
+  if (!rows.length || !window.matchMedia("(pointer: fine)").matches) return;
+
+  var preview = document.createElement("img");
+  preview.className = "row-preview";
+  preview.alt = "";
+  document.body.appendChild(preview);
+
+  var target = { x: 0, y: 0 };
+  var pos = { x: 0, y: 0 };
+  var active = false;
+
+  rows.forEach(function (row) {
+    row.addEventListener("pointerenter", function () {
+      preview.src = row.getAttribute("data-preview");
+      preview.classList.add("is-on");
+      active = true;
+    });
+    row.addEventListener("pointerleave", function () {
+      preview.classList.remove("is-on");
+      active = false;
     });
   });
+  window.addEventListener("pointermove", function (event) {
+    target.x = event.clientX;
+    target.y = event.clientY;
+  }, { passive: true });
+
+  (function follow() {
+    pos.x += (target.x - pos.x) * 0.15;
+    pos.y += (target.y - pos.y) * 0.15;
+    if (active) {
+      preview.style.transform = "translate(" + (pos.x + 30) + "px," + (pos.y - 120) + "px) rotate(" + ((target.x - pos.x) * 0.04) + "deg)";
+    }
+    requestAnimationFrame(follow);
+  })();
 }
 
 /* ---------- Footer year ---------- */
@@ -316,13 +334,14 @@ document.addEventListener("DOMContentLoaded", function () {
   setupNav();
   setupReveal();
   setupCounters();
-  setupCarousel();
   setupSeasonFilter();
   setupLightbox();
   setupYear();
   setupProgressBar();
-  setupCursor();
-  setupMagnetic();
+  setupHeaderState();
   setupSplitHeadings();
-  setupTilt();
+  setupManifesto();
+  setupReel();
+  setupParallax();
+  setupRowPreview();
 });
