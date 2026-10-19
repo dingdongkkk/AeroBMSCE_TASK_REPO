@@ -2,7 +2,8 @@
 
 A rebuilt, responsive website for **AeroBMSCE**, the aerospace, aeromodelling and unmanned systems club of BMS College of Engineering. Built for the AeroBMSCE Web Development recruitment task.
 
-**Live site:** https://aerobmsce-revamp.vercel.app
+**Live site (GitHub Pages):** https://dingdongkkk.github.io/AeroBMSCE_TASK_REPO/  
+**Mirror (Vercel):** https://aerobmsce-revamp.vercel.app
 
 > Practice website for the recruitment task — not the official AeroBMSCE website.
 
@@ -26,7 +27,7 @@ It's plain HTML, CSS and JavaScript with no build step. Open `index.html` in a b
 python3 -m http.server 8000
 ```
 
-Deployed on Vercel as a static site (no build step): https://aerobmsce-revamp.vercel.app
+Deployed on GitHub Pages from the `main` branch root (https://dingdongkkk.github.io/AeroBMSCE_TASK_REPO/), with a mirror on Vercel (https://aerobmsce-revamp.vercel.app). No build step either way.
 
 ## Project structure
 

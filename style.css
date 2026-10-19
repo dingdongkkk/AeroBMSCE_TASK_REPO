@@ -788,7 +788,7 @@ a.row:hover .row-thumb, a.row:focus-visible .row-thumb { filter: none; transform
 
   .hero3d { min-height: 640px; }
   .hero3d-bottom { flex-direction: column; align-items: flex-start; }
-  .hud--tr, .scroll-cue { display: none; }
+  .hud, .scroll-cue { display: none; }
 
   .page-hero { height: auto; min-height: 760px; align-items: flex-end; padding: 0 0 56px; }
   .page-hero::after { background: linear-gradient(180deg, rgba(11, 10, 9, 0) 30%, rgba(11, 10, 9, .85) 62%, var(--bg) 100%); }
@@ -831,3 +831,4 @@ a.row:hover .row-thumb, a.row:focus-visible .row-thumb { filter: none; transform
   .notice-long { display: none; }
   .notice-short { display: inline; }
 }
+.vision-note { margin-top: 28px; }
